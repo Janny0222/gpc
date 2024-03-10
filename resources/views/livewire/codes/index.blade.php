@@ -11,9 +11,9 @@
                         </div>
                         
                         <div class="flex items-center gap-4 ml-auto">
-                            <x-button wire:click="$emitTo('users.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
+                            <x-button wire:click="$emitTo('codes.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
                                 <x-icons.solid.user-plus class="w-4 h-4 mr-2"/>
-                                Add User
+                                Add Code
                             </x-button>
                         </div>
                     </div>
@@ -25,28 +25,21 @@
                                     Name
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Email
+                                    Code
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Username
-                                </x-table-heading>
-                                <x-table-heading>
-                                    Status
-                                </x-table-heading>
-                                <x-table-heading>
-                                    Created_at
-                                </x-table-heading>
-                                <x-table-heading>
-                                    Action
+                                    Actions
                                 </x-table-heading>
                             </x-slot>
                             <x-slot name="body">
-                                 @forelse($users as $user) 
+                                 {{-- @forelse($users as $user)  --}}
+                                 @forelse ($codes as $code)
                                 <x-table-row>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                                 {{ $user->name }}
+                                                 {{-- {{ $user->name }} --}}
+                                                 {{ $code->name }}
 
                                             </div>
                                         </div>
@@ -54,20 +47,15 @@
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                               {{ $user->email }} 
+                                               {{-- {{ $user->email }}  --}}
+                                                {{ $code->code }}
                                             </div>
                                         </div>
                                     </x-table-cell>
-                                    <x-table-cell>
+            
+                                    {{-- <x-table-cell>
                                         <div class="cursor-pointer">
-                                            <div class="font-medium text-gray-900">
-                                                 {{ $user->username }} 
-                                            </div>
-                                        </div>
-                                    </x-table-cell>
-                                    <x-table-cell>
-                                        <div class="cursor-pointer">
-                                            <div class="font-medium text-white rounded
+                                            <div class="font-medium text-white rounded">
                                             @if($user->status_id == 1) bg-green-800 @else bg-red-800 @endif">
                                                 
                                                  {{ $user->status->name }} 
@@ -80,29 +68,17 @@
                                                  {{ $user->created_at }} 
                                             </div>
                                         </div>
-                                    </x-table-cell>
+                                    </x-table-cell> --}}
                                     <x-table-cell>
                                         <div class="flex items-center justify-center gap-3 cursor-pointer">
-                                            <a wire:click="$emitTo('users.create', 'open-edit-modal', {{$user->id}})" 
+                                            <a wire:click="" 
                                                 class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
                                                 Edit
                                             </a>
-                                            <div>
-                                                |
-                                            </div>
-                                            <a href="{{route ('users.permissions', $user->id)}}" 
-                                                class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Permissions
-                                            </a>
-                                            <div>
-                                                |
-                                            </div>
-                                            <a wire:click="$emitTo('users.change-password', 'open-change-password-modal', {{ $user->id }})" 
-                                                class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Change Pass
-                                            </a>
+                                            
                                         </div>
                                     </x-table-cell>
+                                     {{-- @endforeach --}}
                                 </x-table-row>
                                  @empty
                                 <x-table-row>
@@ -115,10 +91,11 @@
                                     </x-table-cell>
                                 </x-table-row>
                                 @endforelse
+                                
                             </x-slot>
                         </x-table>
                         <div class="pt-3">
-                             {{ $users->withQueryString()->links() }}
+                             {{ $codes->withQueryString()->links() }}
                         </div>
                     </div>
                 </div>

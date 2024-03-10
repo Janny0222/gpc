@@ -11,98 +11,101 @@
                         </div>
                         
                         <div class="flex items-center gap-4 ml-auto">
-                            <x-button wire:click="$emitTo('users.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
+                            <x-button wire:click="$emitTo('companies.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
                                 <x-icons.solid.user-plus class="w-4 h-4 mr-2"/>
-                                Add User
+                                Add Company
                             </x-button>
                         </div>
+                        {{-- <div class="relative">
+                        <x-select id="codes" class="block w-full mt-1" :name="__('codes')" :value="old('codes')"
+                            wire:model.defer="codes"
+                            wire:loading.attr="disabled"
+                            wire:target='store'
+                            required
+                            autofocus
+                        >
+                            <option value="">Select Code</option>
+                            @if(isset($codes))
+                                @foreach ($codes as $code)
+                                    <option value="{{$code->code}}">{{$code->name}}</option>
+                                @endforeach
+                            @endif
+                        </x-select>
+                        </div> --}}
                     </div>
                     <div class="p-6 bg-white border-gray-400">
                     
                         <x-table>
                             <x-slot name="head">
                                 <x-table-heading>
-                                    Name
+                                    Code
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Email
+                                    Company Name
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Username
+                                    Owner's Name
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Status
+                                    TIN
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Created_at
+                                    Registered Address
                                 </x-table-heading>
                                 <x-table-heading>
                                     Action
                                 </x-table-heading>
                             </x-slot>
                             <x-slot name="body">
-                                 @forelse($users as $user) 
+                                 
+                                 @forelse ($company as $comp)
                                 <x-table-row>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                                 {{ $user->name }}
-
+                                                {{ $comp->codes }} 
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                               {{ $user->email }} 
+                                                {{ $comp->company_name }}
+                                            </div>
+                                        </div>
+                                    </x-table-cell>
+            
+                                    <x-table-cell>
+                                        <div class="cursor-pointer">
+                                            <div class="font-medium text-gray-900 rounded">                                                
+                                                 {{ $comp->owners_name }}
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                                 {{ $user->username }} 
-                                            </div>
-                                        </div>
-                                    </x-table-cell>
-                                    <x-table-cell>
-                                        <div class="cursor-pointer">
-                                            <div class="font-medium text-white rounded
-                                            @if($user->status_id == 1) bg-green-800 @else bg-red-800 @endif">
-                                                
-                                                 {{ $user->status->name }} 
+                                                 {{ $comp->tin }}
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                                 {{ $user->created_at }} 
+                                                 {{ $comp->address }}
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="flex items-center justify-center gap-3 cursor-pointer">
-                                            <a wire:click="$emitTo('users.create', 'open-edit-modal', {{$user->id}})" 
+                                            <a wire:click="$emitTo('companies.create', 'open-edit-modal', {{$comp->id}})" 
                                                 class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
                                                 Edit
                                             </a>
-                                            <div>
-                                                |
-                                            </div>
-                                            <a href="{{route ('users.permissions', $user->id)}}" 
-                                                class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Permissions
-                                            </a>
-                                            <div>
-                                                |
-                                            </div>
-                                            <a wire:click="$emitTo('users.change-password', 'open-change-password-modal', {{ $user->id }})" 
-                                                class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Change Pass
-                                            </a>
+                                            
                                         </div>
                                     </x-table-cell>
+                                     {{-- @endforeach --}}
                                 </x-table-row>
                                  @empty
                                 <x-table-row>
@@ -115,10 +118,11 @@
                                     </x-table-cell>
                                 </x-table-row>
                                 @endforelse
+                                
                             </x-slot>
                         </x-table>
                         <div class="pt-3">
-                             {{ $users->withQueryString()->links() }}
+                             {{ $company->withQueryString()->links() }}
                         </div>
                     </div>
                 </div>

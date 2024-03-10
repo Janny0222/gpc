@@ -1,14 +1,10 @@
-<div x-data="{ open: false"
-      x-on:resize.window="
-         open = window.innerWidth >= 680;
-         isMobile = window.innerWidth <= 680;
-         isDesktop = window.innerWidth >= 680"
-      x-transition:enter="transition ease-out duration-300"
-      x-transition:enter-start="transform -translate-x-full"
-      x-transition:enter-end="transform translate-x-0"
-      x-transition:leave="transition ease-in duration-300"
-      x-transition:leave-start="transform translate-x-0"
-      x-transition:leave-end="transform -translate-x-full"
+<div x-data="{ open: window.innerWidth >= 800 }" x-on:resize.window="open = window.innerWidth >= 800" x-on:resize.window="isMobile = window.innerWidth <= 800, isDesktop = window.innerWidth >= 800"
+x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="transform -translate-x-full"
+        x-transition:enter-end="transform translate-x-0"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="transform translate-x-0"
+        x-transition:leave-end="transform -translate-x-full"
 >
 <button
         x-show="!open"
@@ -51,9 +47,9 @@
         </svg>
    </button>
    <button
-    x-show="open && window.innerWidth <= 680"
+    x-show="open && window.innerWidth <= 800"
     x-on:click="open = false"
-    class="fixed z-50 p-2 text-gray-500 bg-gray-100 rounded-md top-3 right-3 focus:outline-none">
+    class="fixed z-50 p-2 text-white bg-black rounded-md top-3 left-48 focus:outline-none">
     <span class="sr-only">Close sidebar</span>
     <svg
         class="w-6 h-6"
@@ -83,15 +79,15 @@
       <div class="h-full overflow-y-auto text-white bg-gray-50 dark:bg-gray-800">
          
             
-               <div class="content-between w-full bg-black">
+               <div class="content-between w-full bg-black ">
                   
-                  <div class="p-[22px] text-[25px] w-full"> P . A . R . S</div>
+                  <div class="p-[22px] text-[25px] w-full "> <span class="drop-shadow-[35px_35px_35px_rgba(255,255,255,1.25)]"> P . A . R . S </span></div>
                   
                   
                </div>
             
             
-               <a href="{{ route('properties.index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-green-700 group">
+               <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-green-700 group">
                   <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                      <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                      <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
@@ -180,29 +176,29 @@
                   </div>
                </div> --}}
                <div x-data="{ selected: null }">
-                  <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-green-700 group focus:bg-green-900 focus:outline-none focus:shadow-outline" @click="selected = (selected !== 3) ? 3 : null" href="#" id="maintenance-accounts">
+                  <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-green-700 group focus:bg-green-900 focus:outline-none focus:shadow-outline" @click="selected = (selected !== 1) ? 1 : null" href="#" id="maintenance-accounts">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
                      </svg>
                      <span class="flex-1 ms-3 whitespace-nowrap"> Maintenance</span>
-                     <svg :class="{ 'rotate-90': selected == 3 }" class="w-4 h-4 ml-auto transition ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <svg :class="{ 'rotate-90': selected == 1 }" class="w-4 h-4 ml-auto transition ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                      </svg>
                   </a>
 
         <!-- Maintenance Content -->
-               <div class="relative mx-auto text-sm font-thin leading-7 text-left bg-gray-900 text"
-                     x-show="selected == 3"
+               <div class="relative mx-auto text-sm leading-7 text-left bg-gray-900 text"
+                     x-show="selected == 1"
                      x-collapse.duration.300ms=""
                      style="height: auto;"> 
-                     <a class="flex items-center block px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="#">
+                     <a class="flex items-center px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{route('companies.index')}}">
                         Company / Owner
                      </a>                                                                                    
-                     <a class="flex items-center block px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="#">
+                     <a class="flex items-center px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('codes.index') }}">
                         Area Code
                      </a>                                                        
                                                                                                         
-                     <a class="flex items-center block px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('users.index') }}">
+                     <a class="flex items-center px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('users.index') }}">
                         Users
                      </a>                                         
                </div>

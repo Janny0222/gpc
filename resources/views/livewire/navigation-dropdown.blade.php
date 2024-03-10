@@ -1,9 +1,9 @@
-<div>
+<div class="bg-gray-200">
     <div class="relative z-10">
         <div class="flex items-center justify-end px-5 py-5 text-gray-500">
             {{-- Baling Station --}}
             <div class="flex items-center mr-auto text-[25px] font-bold">
-                <a
+                {{-- <a
                     @click.prevent="handleOpen()"
                     class="pr-4 text-gray-700 hover:text-green-900 xl:hidden"
                     href="#"
@@ -22,7 +22,7 @@
                             d="M4 6h16M4 12h16M4 18h16"
                         />
                     </svg>
-                </a>
+                </a> --}}
     
                 <span class="text-green-700">Property Asset</span></span>
             </div>

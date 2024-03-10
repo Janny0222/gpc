@@ -19,8 +19,8 @@ class UserController extends Controller
         return view('users.permissions', compact('uid'));
     }
 
-    public function activityLogs()
-    {
-        return view('users.activity-logs');
-    }
+//     public function activityLogs()
+//     {
+//         return view('users.activity-logs');
+//     }
 }

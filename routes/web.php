@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Property\AddLotController;
 use Illuminate\Support\Facades\Route;
 use Psy\Readline\Userland;
 
@@ -29,10 +30,17 @@ Route::group(['middleware' => ['auth']], function () {
     //     return view('properties.index');
     // })->name('properties.index');
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+    Route::get('/add-property', [PropertyController::class, 'create'])->name('properties.add');
+    Route::get('/property/add-lot', [AddLotController::class, 'index'])->name('property.add-lot');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/permissions/{id}', [UserController::class, 'permissions'])->name('users.permissions');
+    Route::get('/users/permissions/{id}', [UserController::class, 'permissions'])->middleware('can:view-users')->name('users.permissions');
+
+    Route::get('/codes', [CodesController::class, 'index'])->name('codes.index');
+
+    Route::get('/company', [CompanyController::class, 'index'])->name('companies.index');
 
     Route::get('/test', [TestController::class, 'index'])->name('users.test');
     

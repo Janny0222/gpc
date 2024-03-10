@@ -1,8 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         {{-- Breadcrumbs --}}
-        <div class="flex items-center justify-start text-lg font-bold text-gray-500">
-            <div class="mx-2 text-gray-800">User</div>
+        <div class="flex items-center justify-start font-bold text-gray-500">
+            <a href="{{ route('dashboard') }}"><x-icons.solid.home class="w-6 h-6"></x-icons.solid.home></a>
+            <x-icons.outline.chevron-right class="w-5 h-5"></x-icons.outline.chevron-right>
+            <a href="#" class="mx-2">Maintenance</a>
+            <x-icons.outline.chevron-right class="w-5 h-5"></x-icons.outline.chevron-right>
+            <a href="{{ route('users.index') }}" class="mx-2 font-extrabold text-black">Users</a>
         </div>
     </x-slot>
 

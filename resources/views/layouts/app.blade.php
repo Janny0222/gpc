@@ -82,7 +82,7 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased scroll-smooth">
-        <div id="app" x-data="{ isDesktop: window.innerWidth >= 680 }" x-on:resize.window="isDesktop = window.innerWidth >= 680">
+        <div id="app" x-data="{ isDesktop: window.innerWidth >= 800 }" x-on:resize.window="isDesktop = window.innerWidth >= 800">
         @include('livewire.sidebar')
         
             <!-- Page Heading -->
@@ -90,10 +90,10 @@
            
                 
                 <!-- Page Content -->
-                <main :class="{'ml-56': isDesktop}">
+                <main :class="{'ml-60': isDesktop}">
                     @livewire('navigation-dropdown')
-                    <header class="w-full bg-white" >
-                        <div class="px-6 py-6 mx-auto">
+                    <header class="w-full " >
+                        <div class="px-6 py-6 mx-auto my-6">
                             {{ $header }}
                         </div>
                     </header>

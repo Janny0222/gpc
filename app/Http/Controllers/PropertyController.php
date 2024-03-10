@@ -10,4 +10,7 @@ class PropertyController extends Controller
     {
         return view('properties.index');
     }
+    public function create(){
+        return view('properties.add-property');
+    }
 }

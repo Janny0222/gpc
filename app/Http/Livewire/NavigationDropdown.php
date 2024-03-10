@@ -18,12 +18,12 @@ class NavigationDropdown extends Component
     public function render()
     {
         // Check if location session is set
-        if (session()->get('location_id')) {
-            $this->location = session()->get('location_id');
-        } else {
-            session()->put('location_id', Auth::user()->default_location);
-            $this->location = Auth::user()->default_location;
-        }
+        // if (session()->get('location_id')) {
+        //     $this->location = session()->get('location_id');
+        // } else {
+        //     session()->put('location_id', Auth::user()->default_location);
+        //     $this->location = Auth::user()->default_location;
+        // }
 
         
 

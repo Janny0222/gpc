@@ -6,12 +6,18 @@
                     <div class="text-gray-500">{{ $name }}</div>
                 </div>
             </div>
-            <div class="p-6 bg-white border-b border-gray-200">
+            
+            <div class="p-1 bg-white border-b border-gray-200">
+            {{-- <input type="checkbox" id="select-all-checkbox" wire:model="selectAll" /> --}}
+
+            <label for="select-all-checkbox">Select All</label>
                 <form wire:submit.prevent="store">
                     <div class="columns-1 md:columns-2 2xl:columns-4 gap-8 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit">
                         <div class="mb-6 rounded-lg break-inside-avoid">
+                        
                             <legend class="sr-only">Dashboard</legend>
                             <div class="text-base font-bold text-gray-900" aria-hidden="true">Dashboard</div>
+                            
                             <div class="p-3 mt-4 space-y-4 border-2 rounded">
                                 @foreach($dashboards as $dashboard)
                                 @php $index++ @endphp
@@ -150,3 +156,17 @@
         </div>
     </div>
 </div>
+{{-- @push('scripts')
+<script>
+    document.getElementById('select-all-checkbox').addEventListener('change', function () {
+        var checkboxes = document.querySelectorAll('input[name^="selected_permissions"]');
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = event.target.checked;
+        });
+        // Trigger Livewire change event manually
+        checkboxes.forEach(function (checkbox) {
+            checkbox.dispatchEvent(new Event('change'));
+        });
+    });
+</script>
+@endpush --}}

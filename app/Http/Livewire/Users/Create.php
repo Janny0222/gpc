@@ -79,7 +79,7 @@ class Create extends Component
 
         // $user->locations()->attach($this->selected_locations);
 
-        // Refresh vouchers list
+        
         $this->emit('refresh-users');
         
         // Notification
@@ -148,7 +148,7 @@ class Create extends Component
         //         ->log(':causer.name updated the location(s) of :subject.name account.');
         // }
 
-        // Refresh vouchers list
+        
         $this->emit('refresh-users');
 
         // Notification

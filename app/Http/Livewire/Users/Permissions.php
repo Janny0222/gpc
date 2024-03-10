@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
-use Spatie\Permission\Models\Permission as ModelsPermission;
+use Spatie\Permission\Models\Permission;
 
-class Permission extends Component
+class Permissions extends Component
 {
     public $isPermissionModal = false;
     
@@ -23,7 +23,7 @@ class Permission extends Component
 
     public function mount()
     {
-        $user = User::find($this->id);
+        $user = User::find($this->uid);
 
         $permission_ids = [];
         foreach($user->permissions as $permission){
@@ -50,7 +50,7 @@ class Permission extends Component
     public function store()
     {
         $user = User::find($this->uid);
-        $sync = $user->syncPermission($this->selected_permissions);
+        $sync = $user->syncPermissions($this->selected_permissions);
 
         $this->emit('refresh-sidebar');
 
