@@ -10,27 +10,27 @@
         <x-slot name="content">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-12">
                 <div class="col-span-12">
-                    <x-label :for="__('codes')" :value="__('Code')" :errors="$errors"/>
+                    <x-label :for="__('code_id')" :value="__('Code')" :errors="$errors"/>
                     <div class="relative">
-                        <x-select id="codes" class="block w-full mt-1" :name="__('codes')" :value="old('codes')"
-                            wire:model.defer="codes"
+                        <select id="code_id" class="block w-full mt-1 py-2 border-gray-300 border rounded-md shadow-sm focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" :name="__('code_id')" :value="old('code_id')"
+                            wire:model.defer="code_id"
                             wire:loading.attr="disabled"
-                            wire:target='store'
+                            wire:target='store, update'
                             required
                             autofocus
                         >
-                            <option value="">Select Code</option>
+                            <option value="" disabled selected class="text-gray-500">Select Code</option>
                                 @foreach ($cv as $code)
-                                    <option class="p-5" value="{{$code->code}}">{{$code->code}}</option>
+                                    <option class="py-5 line-through" value="{{$code->id}}">{{$code->code}}</option>
                                 @endforeach
-                        </x-select>
+                        </select>
                         
                     </div>
                 </div>
                 <div class="col-span-12">
                     <x-label :for="__('company_name')" :value="__('Company Name')" :errors="$errors"/>
                     <div class="relative">
-                        <x-input id="company_name" class="block w-full mt-1" type="text" :name="__('company_name')" :value="old('company_name')" :errors="$errors" 
+                        <x-input id="company_name" class="block w-full mt-1" type="text" :name="__('owners_name')" :value="old('company_name')" :errors="$errors" 
                                 wire:model.defer="company_name"
                                 wire:loading.attr="disabled"
                                 wire:target='store, update'
@@ -79,7 +79,6 @@
                         <x-input-error for="address"/>
                     </div>
                 </div>
-                
             </div>
         </x-slot>
         <x-slot name="footer">

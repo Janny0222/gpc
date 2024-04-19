@@ -41,7 +41,7 @@ class Create extends Component
 
         return view('livewire.users.create', compact('statuses'));
     }
-
+        
         public function openCreateModal()
         {
             

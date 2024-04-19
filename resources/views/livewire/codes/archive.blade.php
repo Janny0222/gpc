@@ -6,13 +6,14 @@
                     <div class="flex items-center justify-between px-6 py-4 font-bold border-b">
                         <div class="flex justify-start gap-4">
                             <div class="relative">
-                                <x-input id="search" class="block w-full pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
+                                <x-input id="search" class="block w-full mt-1 pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
                                 <div class="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900">
                                     <x-icons.solid.magnifying-glass class="w-5 h-5 text-gray-400" />
                                 </div>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4 ml-auto">
+                        
+                        <div class="hidden items-center gap-4 ml-auto">
                             <x-button wire:click="$emitTo('codes.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
                                 <x-icons.solid.squares-plus class="w-4 h-4 mr-2"/>
                                 Add Code
@@ -23,16 +24,16 @@
                         <div class="flex items-center justify-between px-6 py-4 font-bold border-b">
                             <div class="hidden justify-start gap-4">
                                 <div class="relative">
-                                    <x-input id="search" class="block w-full  pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
+                                    <x-input id="search" class="block w-full mt-1 pl-8 pr-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
                                     <div class="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900">
                                         <x-icons.solid.magnifying-glass class="w-5 h-5 text-gray-400" />
                                     </div>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 ml-auto">
-                                <x-button-link href="{{route ('codes.archive')}}" class="w-full dark:bg-gray-800 xl:w-auto">
-                                    <x-icons.solid.archive-box class="w-4 h-4 mr-2"/>
-                                    Show Archive
+                                <x-button-link href="{{route ('codes.index')}}" class="w-full dark:bg-gray-800 xl:w-auto">
+                                    <x-icons.solid.squares-plus class="w-4 h-4 mr-2"/>
+                                    Show Active
                                 </x-button-link>
                             </div>
                         </div>
@@ -74,9 +75,10 @@
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
-                                            <div class="font-medium flex justify-center" >
+                                            <div class="font-medium flex justify-center align-middle  m-auto bg-red-800 text-white rounded">
                                                {{-- {{ $user->email }}  --}}
-                                                <x-icons.solid.check-circle class="w-5 h-5 text-green-800 bg-white rounded"/>
+                                                
+                                                {{$code->status->name}}
                                             </div>
                                         </div>
                                     </x-table-cell>
@@ -104,9 +106,9 @@
                                                 Edit
                                             </a>
                                             |
-                                            <a wire:click="archive( {{$code->id}})" 
+                                            <a wire:click="activate( {{$code->id}})" 
                                                 class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Archive
+                                                Activate
                                             </a>
                                         </div>
                                     </x-table-cell>

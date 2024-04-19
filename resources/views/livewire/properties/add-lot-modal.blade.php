@@ -1,5 +1,5 @@
 <div>
-    <x-form-modal maxWidth="xl" wire:model.defer="isCreateModalOpen" submit="">
+    <x-form-modal maxWidth="xl" wire:model.defer="isCreateModalOpen" submit="{{ $action }}">
         <x-slot name="title">
             {{ $form_title }} Lot
             <button type="button" wire:click="closeAddModal()" wire:loading.attr="disabled" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700">
@@ -9,15 +9,17 @@
         <x-slot name="description"></x-slot>
         <x-slot name="content">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-12">
+                
                 <div class="col-span-12">
                     <x-label :for="__('area')" :value="__('Area')" :errors="$errors"/>
                     <div class="relative">
                         <x-input id="area" class="block w-full mt-1" type="text" :name="__('area')" :value="old('area')" :errors="$errors" 
                                 wire:model.defer="area"
                                 wire:loading.attr="disabled"
-                                wire:target='saveLot'
+                                wire:target='store'
                                 required
                                 autofocus
+                                {{-- @if($form_title != 'Edit' || $form_title != 'Add') disabled @endif --}}
                         />
                         <x-input-error for="area"/>
                     </div>
@@ -28,7 +30,7 @@
                         <x-input id="tct" class="block w-full mt-1" type="text" :name="__('tct')" :value="old('tct')" :errors="$errors" 
                                 wire:model.defer="tct"
                                 wire:loading.attr="disabled"
-                                wire:target='saveLot'
+                                wire:target='store'
                                 required
                                 autofocus
                         />
@@ -151,12 +153,12 @@
                 <x-icons.solid.x class="w-4 h-4 mr-2"/>
                 {{ __('Cancel') }}
             </x-button> --}}
-            <x-button class="my-1 ml-3" wire:click="saveLot" wire:loading.attr="disabled" wire:target="saveLot">
-                <div wire:loading wire:target="saveLot">
+            <x-button class="my-1 ml-3" wire:loading.attr="disabled" wire:target="store, update">
+                <div wire:loading wire:target="store, update">
                     <x-icons.loading class="w-4 mr-2"/>
                 </div>
-                <x-icons.solid.paper-plane wire:loading.remove wire:target="saveLot" class="w-4 h-4 mr-1 -mt-1 rotate-45"/>
-                {{ __('Save') }}
+                <x-icons.solid.paper-plane wire:loading.remove wire:target="store, update" class="w-4 h-4 mr-1 -mt-1 rotate-45"/>
+                {{ $button_name }}
             </x-button>
         </x-slot>
     </x-form-modal>

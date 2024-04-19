@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -11,4 +12,9 @@ class CompanyController extends Controller
     {
         return view('companies.index');
     }
+    public function archive()
+    {
+        return view('companies.archive');
+    }
+    
 }

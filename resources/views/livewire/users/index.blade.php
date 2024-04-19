@@ -6,7 +6,10 @@
                     <div class="flex items-center justify-between px-6 py-4 font-bold border-b">
                         <div class="flex justify-start gap-4">
                             <div class="relative">
-                                <x-input id="search" class="block w-full mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
+                                <x-input id="search" class="block w-full mt-1 pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
+                                <div class="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900">
+                                    <x-icons.solid.magnifying-glass class="w-5 h-5 text-gray-400" />
+                                </div>
                             </div>
                         </div>
                         
@@ -103,6 +106,7 @@
                                             </a>
                                         </div>
                                     </x-table-cell>
+                                    
                                 </x-table-row>
                                  @empty
                                 <x-table-row>

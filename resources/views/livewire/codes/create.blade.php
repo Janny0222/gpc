@@ -1,7 +1,7 @@
 <div>
     <x-form-modal maxWidth="xl" wire:model.defer="isCreateModalOpen" submit="{{ $action }}">
         <x-slot name="title">
-            {{ $form_title }} Codes
+            {{ $form_title }} Code
             <button type="button" wire:click="closeAddModal()" wire:loading.attr="disabled" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700">
                 <x-icons.solid.x class="w-6 h-6" />
             </button>

@@ -22,31 +22,36 @@ class AddLot extends Component
         'open-add-modal' => 'openAddModal',
         'refresh-lots' => '$refresh',
     ];
-    public function render()
-    {
+    public function render(){
         $lot = Lot::search($this->search)->paginate(5);
         return view('livewire.properties.add-lot')->with('lot', $lot);;
     }
 
-    public function openAddModal()
-        {
-            $this->form_title = 'Add';
-            $this->action = "store";
-            $this->isCreateModalOpen = true;
-        }
+    
 
-        public function closeAddModal()
-    {
-        $this->reset(['tct', 'area']);
-        $this->isCreateModalOpen = false;
-    }
-    public function saveLot(){
+    // public function openAddModal(){
+    //     $this->form_title = 'Add';
+    //     $this->action = "store";
+    //     $this->isCreateModalOpen = true;
+    // }
+
+    // public function openEditModal(){
+    //     $this->form_title = 'Edit';
+    //     $this->action = "update";
+    //     $this->isCreateModalOpen = true;
+    // }
+
+    // public function closeAddModal(){
+    //     $this->reset(['tct', 'area']);
+    //     $this->isCreateModalOpen = false;
+    // }
+    // public function saveLot(){
         
-        $this->emit('lotSaved', ['area' => $this->area, 'tct' => $this->tct]);
+    //     $this->emit('lotSaved', ['area' => $this->area, 'tct' => $this->tct]);
         
 
-        $this->reset(['area', 'tct']);
-        $this->closeAddModal();
-    }
+    //     $this->reset(['area', 'tct']);
+    //     $this->closeAddModal();
+    // }
     
 }

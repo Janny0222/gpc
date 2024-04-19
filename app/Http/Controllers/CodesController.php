@@ -11,4 +11,9 @@ class CodesController extends Controller
     {
         return view('codes.index');
     }
+
+    public function archive()
+    {
+        return view('codes.archive');
+    }
 }

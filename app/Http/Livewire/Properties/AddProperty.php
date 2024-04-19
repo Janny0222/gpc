@@ -19,6 +19,9 @@ class AddProperty extends Component
     public $note1;
     public $note2;
 
+    
+
+
     protected $listeners = [
         'lotSaved' => 'updateLot',
         'warehouseSaved' => 'updateWarehouse',

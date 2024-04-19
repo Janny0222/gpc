@@ -44,30 +44,30 @@
                     </div>
                 </div>
                 @if($form_title== 'Add')
-                <div class="col-span-12">
-                    <x-label :for="__('password')" :value="__('Password')" :errors="$errors"/>
-                    <div class="relative">
-                        <x-input id="password" class="block w-full mt-1" type="password" :name="__('password')" :value="old('password')" :errors="$errors" 
-                                wire:model.defer="password"
-                                wire:loading.attr="disabled"
-                                wire:target='store'
-                                required
-                        />
-                        <x-input-error for="password"/>
+                    <div class="col-span-12">
+                        <x-label :for="__('password')" :value="__('Password')" :errors="$errors"/>
+                        <div class="relative">
+                            <x-input id="password" class="block w-full mt-1" type="password" :name="__('password')" :value="old('password')" :errors="$errors" 
+                                    wire:model.defer="password"
+                                    wire:loading.attr="disabled"
+                                    wire:target='store'
+                                    required
+                            />
+                            <x-input-error for="password"/>
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12">
-                    <x-label :for="__('password_confirmation')" :value="__('Confirm Password')" :errors="$errors"/>
-                    <div class="relative">
-                        <x-input id="password_confirmation" class="block w-full mt-1" type="password" :name="__('password_confirmation')" :value="old('password_confirmation')" :errors="$errors" 
-                                wire:model.defer="password_confirmation"
-                                wire:loading.attr="disabled"
-                                wire:target='store'
-                                required
-                        />
-                        <x-input-error for="password_confirmation"/>
+                    <div class="col-span-12">
+                        <x-label :for="__('password_confirmation')" :value="__('Confirm Password')" :errors="$errors"/>
+                        <div class="relative">
+                            <x-input id="password_confirmation" class="block w-full mt-1" type="password" :name="__('password_confirmation')" :value="old('password_confirmation')" :errors="$errors" 
+                                    wire:model.defer="password_confirmation"
+                                    wire:loading.attr="disabled"
+                                    wire:target='store'
+                                    required
+                            />
+                            <x-input-error for="password_confirmation"/>
+                        </div>
                     </div>
-                </div>
                 @endif
                 @if($form_title == 'Edit')
                 <div class="col-span-12">

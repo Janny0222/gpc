@@ -22,4 +22,11 @@ class CV extends Model
             ->where('name', 'like', '%' . $search . '%')
             ->orWhere('code', 'like', '%' . $search . '%');
     }
+
+    public function status(){
+      return  $this->belongsTo(Status::class);
+    }
+
+    protected static $logFillable = true;
+    protected static $logName = 'system';
 }

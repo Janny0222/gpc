@@ -16,4 +16,6 @@
     @livewire('companies.index')
     @livewire('companies.create')
 
+    @livewireStyles
+ 
 </x-app-layout>

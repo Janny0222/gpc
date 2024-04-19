@@ -6,16 +6,17 @@ use App\Models\CV;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Archive extends Component
 {
     use WithPagination;
     public $search;
+
     protected $listeners = [
         'refresh-codes' => '$refresh',
     ];
     public function render()
     {
-        $query = CV::where('status_id', 1)->orderBy('created_at', 'asc');
+        $query = CV::where('status_id', 2)->orderBy('created_at', 'asc');
 
         if($this->search) {
             $codes = $query->where(function ($query) {
@@ -25,16 +26,18 @@ class Index extends Component
         } else {
             $codes = $query->paginate(5);
         }
-        return view('livewire.codes.index')->with('codes', $codes);
-    }
+        return view('livewire.codes.archive')->with('codes', $codes);
+     }
 
-    public function archive($id){
+    public function activate($id){
         $codes = CV::find($id);
-        $codes->status_id = 2;
+
+        $codes->status_id = 1;
 
         $status = 'success';
-        $message = $codes->name . ' Successfully archived';
+        $message = $codes->name . ' Successfull activate';
         $this->emit('show-notif', $status, $message);
+
         $codes->save();
     }
 }

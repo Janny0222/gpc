@@ -12,7 +12,7 @@ class Property extends Model
     protected $fillable = [
         'cvno',
         'address',
-        'area',
+        'lot_id',
         'warehouse',
         'project',
     ];
@@ -23,6 +23,15 @@ class Property extends Model
             ? self::query()
             : self::query()
             ->where('cvno', 'like', '%' . $search . '%')
-            ->orWhere('area', 'like', '%' . $search . '%');
+            ->orWhere('lot_id', 'like', '%' . $search . '%')
+            ->orWhere('address', 'like', '%' . $search . '%');
+    }
+
+    public function status(){
+        return $this->belongsTo(Status::class);
+    }
+
+    public function lot(){
+        return $this->belongsTo(Lot::class);
     }
 }

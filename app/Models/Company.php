@@ -11,7 +11,7 @@ class Company extends Model
 
     protected $table = "companies";
     protected $fillable = [
-        'codes',
+        'code_id',
         'company_name',
         'owners_name',
         'tin',
@@ -23,10 +23,18 @@ class Company extends Model
         return empty($search)
             ? self::query()
             : self::query()
-            ->where('codes', 'like', '%' . $search . '%')
+            ->where('code_id', 'like', '%' . $search . '%')
             ->orWhere('company_name', 'like', '%' . $search . '%')
             ->orWhere('owners_name', 'like', '%' . $search . '%')
             ->orWhere('tin', 'like', '%' . $search . '%')
             ->orWhere('address', 'like', '%' . $search . '%');
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function code() {
+        return $this->belongsTo(CV::class);
     }
 }

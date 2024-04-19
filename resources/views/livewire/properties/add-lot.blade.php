@@ -31,10 +31,10 @@
                                     Actions
                                 </x-table-heading>
                             </x-slot>
-                            <x-slot name="body">
+                            <x-slot name="body" class="">
                                  {{-- @forelse($users as $user)  --}}
                                  @forelse ($lot as $lots)
-                                <x-table-row>
+                                <x-table-row wire:click="">
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
@@ -71,7 +71,7 @@
                                     </x-table-cell> --}}
                                     <x-table-cell>
                                         <div class="flex items-center justify-center gap-3 cursor-pointer">
-                                            <a wire:click="" 
+                                            <a wire:click="$emitTo('properties.add-lot-modal', 'open-edit-modal', {{$lots->id}})" 
                                                 class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
                                                 Edit
                                             </a>
@@ -95,7 +95,7 @@
                             </x-slot>
                         </x-table>
                         <div class="pt-3">
-                             {{-- {{ $codes->withQueryString()->links() }} --}}
+                             {{ $lot->withQueryString()->links() }}
                         </div>
                     </div>
                 </div>

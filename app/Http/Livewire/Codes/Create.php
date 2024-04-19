@@ -6,7 +6,8 @@ use App\Models\CV;
 use Livewire\Component;
 
 class Create extends Component
-{
+{   
+    public $cid;
     public $name;
     public $code;
     public $action;
@@ -24,14 +25,49 @@ class Create extends Component
         return view('livewire.codes.create');
     }
 
+    //  function for Modal Create
     public function openCreateModal()
     {
-        
         $this->action = 'store';
         $this->form_title = 'Add';
         $this->button_name = 'Submit';
         $this->isCreateModalOpen = true;
         // $this->isCreateEditModalOpen = true;
+    }
+
+    // function for Modal Edit
+    public function openEditModal($id){
+        $this->action = 'update';
+        $this->form_title = 'Edit';
+        $this->button_name = 'Update';
+
+        $codes = CV::find($id);
+
+        $this->cid = $codes->id;
+        $this->name = $codes->name;
+        $this->code = $codes->code;
+
+        $this->isCreateModalOpen = true;
+    }
+    public function update(){
+        $this->validate([
+            'name' => ['required'],
+            'code' => ['required'],
+        ]);
+
+        $codes = CV::where('id', $this->cid);
+        $update = $codes->firstOrFail()->update([
+            'name' => $this->name,
+            'code' => $this->code,
+        ]);
+        $this->emit('refresh-codes');
+
+        $status = 'success';
+        $message = $this->name .' Successfully updated';
+        $this->emit('show-notif', $status, $message);
+
+        $this->isCreateModalOpen = false;
+        $this->reset(['name', 'code']);
     }
     public function store()
     {
@@ -40,22 +76,12 @@ class Create extends Component
             'code' => ['required'],
             
         ]);
-        
-        // Check if the selected default location is included in the chosen locations
-        // $selected_locations = collect($this->selected_locations);
-        // if (!$selected_locations->contains($this->default_location)) {
-        //     // Display error message
-        //     return false;
-        // }
 
         $codes = CV::create([
             'name' => $this->name,
             'code' => $this->code,
         ]);
 
-        // $user->locations()->attach($this->selected_locations);
-
-        // Refresh vouchers list
         $this->emit('refresh-codes');
         
         // Notification

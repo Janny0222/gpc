@@ -8,8 +8,13 @@
         <title>{{ config('app.name', 'Property Asset - GPC') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="/css/flatpickr.css" />
@@ -80,15 +85,15 @@
         
 
         @livewireStyles
+        
+        @stack('styles')
+        @stack('scripts')
     </head>
-    <body class="font-sans antialiased scroll-smooth">
+    <body class="antialiased font-lato scroll-smooth">
         <div id="app" x-data="{ isDesktop: window.innerWidth >= 800 }" x-on:resize.window="isDesktop = window.innerWidth >= 800">
         @include('livewire.sidebar')
-        
+        {{-- @include('layouts.sidebar') --}}
             <!-- Page Heading -->
-            
-           
-                
                 <!-- Page Content -->
                 <main :class="{'ml-60': isDesktop}">
                     @livewire('navigation-dropdown')
@@ -99,10 +104,8 @@
                     </header>
                     {{ $slot }}
                 </main>
-            
-
-            @livewireScripts
+                @livewireScripts
         </div>
-        
+       
     </body>
 </html>

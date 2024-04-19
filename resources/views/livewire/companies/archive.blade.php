@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         
-                        <div class="flex items-center gap-4 ml-auto">
+                        <div class="items-center gap-4 ml-auto hidden">
                             <x-button wire:click="$emitTo('companies.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
                                 <x-icons.solid.home-modern class="w-4 h-4 mr-2"/>
                                 Add Company
@@ -32,9 +32,9 @@
                             </div>
                             
                             <div class="flex items-center ml-auto">
-                                <x-button-link href="{{route('companies.archive')}}" class="w-full dark:bg-gray-800 xl:w-auto">
+                                <x-button-link href="{{route ('companies.index')}}" class="w-full dark:bg-gray-800 xl:w-auto">
                                     <x-icons.solid.archive-box class="w-4 h-4 mr-2"/>
-                                    Show Archive
+                                    Show Active
                                 </x-button-link>
                             </div>
                         </div>
@@ -56,20 +56,20 @@
                                     Registered Address
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Active
+                                    Status
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Action
+                                    Actions
                                 </x-table-heading>
                             </x-slot>
                             <x-slot name="body">
                                  
                                 @forelse ($company as $comp)
-                                    <x-table-row id="company-row-{{ $comp->id }}" class="{{ $comp->id == $updatedRowId ? 'test' : '' }}">
+                                    <x-table-row>
                                         <x-table-cell>
                                             <div class="cursor-pointer">
-                                                <div class="font-medium text-gray-900" >
-                                                    {{ $comp->code->code }} 
+                                                <div class="font-medium text-gray-900">
+                                                    {{ $comp->codes }} 
                                                 </div>
                                             </div>
                                         </x-table-cell>
@@ -102,28 +102,24 @@
                                                 </div>
                                             </div>
                                         </x-table-cell>
-                                        
                                         <x-table-cell>
                                             <div class="cursor-pointer">
-                                                <div class="flex justify-center font-mediumrounded">
-                                                    <x-icons.solid.check-circle class="w-5 h-5   mr-2  text-green-800 bg-white"/>
+                                                <div class="font-medium text-white rounded bg-red-800 ">
+                                                    {{ $comp->status->name }} 
                                                 </div>
                                             </div>
                                         </x-table-cell>
                                         <x-table-cell>
                                             <div class="flex items-center justify-center gap-3 cursor-pointer">
                                                 <a wire:click="$emitTo('companies.create', 'open-edit-modal', {{$comp->id}})" 
-                                                    class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
+                                                    class="hidden first-letter:font-bold text-gray-600 cursor-pointer hover:text-green-500">
                                                     Edit
                                                 </a>
-                                                |
-                                                {{-- <a wire:click="archive({{$comp->id}})" 
-                                                    class="font-bold text-gray-600 cursor-pointer hover:text-green-500"> --}}
-                                                <a x-on:click="if (confirm('Are you sure you want to archive this company?')) { $wire.archive({{$comp->id}}) }"
-                                                        class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                    Archive
-                                                </a>
                                                 
+                                                <a wire:click="activate({{$comp->id}})" 
+                                                    class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
+                                                    Activate
+                                                </a>
                                                 
                                             </div>
                                             
@@ -153,34 +149,3 @@
         </div>
     </div>
 </div>
-@push('styles')
-    <style>
-        /* CSS styles for the highlight effect */
-        .test {
-            background-color: #9AE6B4; /* Highlight color */
-            transition: background-color .5s ease-in; /* Transition for fading effect */
-        }
-       
-        
-    </style>
-@endpush
-
-@push('scripts')
-    <script>
-       document.addEventListener('livewire:load', function () {
-        Livewire.on('highlight-company', function (data) {
-            // Add a class to highlight the updated row
-            document.getElementById('company-row-' + data.id).classList.add('test');
-            
-        });
-        Livewire.on('reset-highlighted-company', function (data) {
-            setTimeout(function () {
-                document.querySelectorAll('.test').forEach(function (element) {
-                        element.classList.remove('test');
-                    });
-                }, data.delay);
-                
-            });
-        });
-    </script>
-@endpush

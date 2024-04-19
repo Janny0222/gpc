@@ -6,114 +6,127 @@
                     <div class="flex items-center justify-between px-6 py-4 font-bold border-b">
                         <div class="flex justify-start gap-4">
                             <div class="relative">
-                                <x-input id="search" class="block w-full pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
+                                <x-input id="search" class="block w-full pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search " wire:model="search"/>
                                 <div class="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900">
                                     <x-icons.solid.magnifying-glass class="w-5 h-5 text-gray-400" />
                                 </div>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4 ml-auto">
-                            <x-button wire:click="$emitTo('codes.create', 'open-create-modal')" class="w-full bg-green-700 xl:w-auto">
-                                <x-icons.solid.squares-plus class="w-4 h-4 mr-2"/>
-                                Add Code
-                            </x-button>
+                        <div class="hidden items-center justify-end gap-4">
+                            <x-button-link href="{{route('properties.add')}}">
+                            <x-icons.solid.plus-circle class="w-4 h-4 mr-2"/>
+                                Add Property
+                            </x-button-link>
                         </div>
                     </div>
-                    <div class="bg-white border-gray-400">
+                    <div class=" bg-white border-gray-200">
                         <div class="flex items-center justify-between px-6 py-4 font-bold border-b">
-                            <div class="hidden justify-start gap-4">
-                                <div class="relative">
-                                    <x-input id="search" class="block w-full  pl-8 pr-1 mt-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
+                            <div class="justify-start hidden">
+                                <div class="relative hidden">
+                                    <x-input id="search" class="block w-full mt-1 pl-8 pr-1" type="text" :name="__('search')" placeholder="Search" wire:model="search"/>
                                     <div class="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900">
                                         <x-icons.solid.magnifying-glass class="w-5 h-5 text-gray-400" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-4 ml-auto">
-                                <x-button-link href="{{route ('codes.archive')}}" class="w-full dark:bg-gray-800 xl:w-auto">
+                            
+                            <div class="flex items-center ml-auto">
+                                <x-button-link href="{{route('properties.index')}}" class="w-full dark:bg-gray-800 xl:w-auto">
                                     <x-icons.solid.archive-box class="w-4 h-4 mr-2"/>
-                                    Show Archive
+                                    Show Active
                                 </x-button-link>
                             </div>
                         </div>
                         <x-table>
                             <x-slot name="head">
                                 <x-table-heading>
-                                    Name
+                                    CV No.
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Code
+                                    Address
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Active
+                                    Area
                                 </x-table-heading>
                                 <x-table-heading>
-                                    Actions
+                                    Warehouse
+                                </x-table-heading>
+                                <x-table-heading>
+                                    Project
+                                </x-table-heading>
+                                <x-table-heading>
+                                    Status
+                                </x-table-heading>
+                                <x-table-heading>
+                                    Action
                                 </x-table-heading>
                             </x-slot>
                             <x-slot name="body">
-                                 {{-- @forelse($users as $user)  --}}
-                                 @forelse ($codes as $code)
+                                @forelse($properties as $property)
                                 <x-table-row>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                                 {{-- {{ $user->name }} --}}
-                                                 {{ $code->name }}
-
+                                                {{-- {{ $po->po_no }} --}}
+                                                {{$property->cvno}}
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                               {{-- {{ $user->email }}  --}}
-                                                {{ $code->code }}
+                                                {{-- {{ $po->customer->name }} --}}
+                                                {{$property->address}}
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
-                                            <div class="font-medium flex justify-center" >
-                                               {{-- {{ $user->email }}  --}}
-                                                <x-icons.solid.check-circle class="w-5 h-5 text-green-800 bg-white rounded"/>
-                                            </div>
-                                        </div>
-                                    </x-table-cell>
-            
-                                    {{-- <x-table-cell>
-                                        <div class="cursor-pointer">
-                                            <div class="font-medium text-white rounded">
-                                            @if($user->status_id == 1) bg-green-800 @else bg-red-800 @endif">
+                                            <div class="font-medium text-gray-900">
+                                                {{-- {{ $po->plant->name }} --}}
+                                                <a href="https://www.google.com/">{{$property->area}}</a>
                                                 
-                                                 {{ $user->status->name }} 
                                             </div>
                                         </div>
                                     </x-table-cell>
                                     <x-table-cell>
                                         <div class="cursor-pointer">
                                             <div class="font-medium text-gray-900">
-                                                 {{ $user->created_at }} 
+                                                {{-- {{ $po->plant->name }} --}}
+                                                {{$property->warehouse}}
                                             </div>
                                         </div>
-                                    </x-table-cell> --}}
+                                    </x-table-cell>
+                                    <x-table-cell>
+                                        <div class="cursor-pointer">
+                                            <div class="font-medium text-gray-900">
+                                                {{-- {{ $po->plant->name }} --}}
+                                                {{$property->project}}
+                                            </div>
+                                        </div>
+                                    </x-table-cell>
+                                    <x-table-cell>
+                                        <div class="cursor-pointer">
+                                            <div class="font-medium text-white rounded
+                                                {{-- {{ $po->plant->name }} --}}
+                                               bg-red-800 ">
+                                               
+                                                {{$property->status->name}}
+                                            </div>
+                                        </div>
+                                    </x-table-cell>
                                     <x-table-cell>
                                         <div class="flex items-center justify-center gap-3 cursor-pointer">
-                                            <a wire:click="$emitTo('codes.create', 'open-edit-modal', {{$code->id}})" 
+                                            <a wire:click="activate({{$property->id}})" 
                                                 class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Edit
+                                                Activate
                                             </a>
-                                            |
-                                            <a wire:click="archive( {{$code->id}})" 
-                                                class="font-bold text-gray-600 cursor-pointer hover:text-green-500">
-                                                Archive
-                                            </a>
+                                            
                                         </div>
+                                        
                                     </x-table-cell>
-                                    
-                                     {{-- @endforeach --}}
                                 </x-table-row>
-                                 @empty
+                                @empty
                                 <x-table-row>
                                     <x-table-cell class="text-center" colspan="12">
                                         <div class="cursor-pointer">
@@ -124,11 +137,11 @@
                                     </x-table-cell>
                                 </x-table-row>
                                 @endforelse
-                                
                             </x-slot>
                         </x-table>
                         <div class="pt-3">
-                             {{ $codes->withQueryString()->links() }}
+                            {{ $properties->withQueryString()->links()}}
+                            
                         </div>
                     </div>
                 </div>

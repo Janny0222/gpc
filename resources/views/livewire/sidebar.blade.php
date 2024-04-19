@@ -13,13 +13,13 @@ x-transition:enter="transition ease-out duration-300"
         data-drawer-toggle="separator-sidebar"
         aria-controls="separator-sidebar"
         type="button"
-        class="inline-flex items-center p-2 mt-2 text-sm text-gray-500 rounded-lg ms-3 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        class="inline-flex items-center fixed z-50 p-2 mt-2 text-sm text-gray-500 rounded-lg ms-3 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-black dark:hover:text-white dark:hover:bg-black dark:focus:ring-gray-600"
         :aria-expanded="open ? 'true' : 'false'"
     >
-        <span class="sr-only">Open sidebar</span>
+        <span class="sr-only bg-red-500">Open sidebar</span>
         <svg
             x-bind:class="{ 'hidden': open, 'block': !open }"
-            class="w-6 h-6"
+            class="w-6 h-6 "
             aria-hidden="false"
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -34,7 +34,7 @@ x-transition:enter="transition ease-out duration-300"
         <svg
             x-bind:class="{ 'hidden': !open, 'block': open }"
             class="w-6 h-6"
-            aria-hidden="true"
+            aria-hidden="false"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ x-transition:enter="transition ease-out duration-300"
    <button
     x-show="open && window.innerWidth <= 800"
     x-on:click="open = false"
-    class="fixed z-50 p-2 text-white bg-black rounded-md top-3 left-48 focus:outline-none">
+    class="fixed z-50 p-2 text-red-600 bg-black rounded-md top-3 left-48 focus:outline-none">
     <span class="sr-only">Close sidebar</span>
     <svg
         class="w-6 h-6"
@@ -191,14 +191,16 @@ x-transition:enter="transition ease-out duration-300"
                      x-show="selected == 1"
                      x-collapse.duration.300ms=""
                      style="height: auto;"> 
-                     <a class="flex items-center px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{route('companies.index')}}">
+                     <a class="flex items-center px-5 py-2 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{route('companies.index')}}">
                         Company / Owner
                      </a>                                                                                    
-                     <a class="flex items-center px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('codes.index') }}">
+                     <a class="flex items-center px-5 py-2 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('codes.index') }}">
                         Area Code
-                     </a>                                                        
-                                                                                                        
-                     <a class="flex items-center px-5 py-4 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('users.index') }}">
+                     </a>
+                     <a class="flex items-center px-5 py-2 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('property.add-lot') }}">
+                        Add Lot
+                     </a>                                                                                                                                 
+                     <a class="flex items-center px-5 py-2 text-sm text-gray-200 transition duration-150 ease-in-out hover:text-white focus:text-white hover:bg-green-900 focus:bg-green-900 focus:outline-none focus:shadow-outline" href="{{ route('users.index') }}">
                         Users
                      </a>                                         
                </div>
@@ -229,7 +231,7 @@ x-transition:enter="transition ease-out duration-300"
       </div>
    </aside>
 </div>
-@push('scripts')
+{{-- @push('scripts')
 <script>
     function toggleMaintenanceContent() {
         return {
@@ -240,4 +242,4 @@ x-transition:enter="transition ease-out duration-300"
         }
     }
 </script>
-@endpush
+@endpush --}}
